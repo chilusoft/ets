@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-5h0$f@htw)-#c6%2kxew8z2*^+=h3)a3j6g656)n8qf6em-+hv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['46.101.3.149', 'chilusoft.dev', 'localhost']
 
 
 # Application definition
