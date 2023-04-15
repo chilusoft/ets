@@ -32,3 +32,10 @@ db.sqlite3
 
 # exclude django migrations
 */migrations/*
+
+node_modules
+
+# exclude .env file
+
+.env
+package-lock.json
