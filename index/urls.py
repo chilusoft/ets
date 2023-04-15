@@ -12,11 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from django.urls import path
+from django.urls import include, path
+
 
 from . import views
 
 app_name = 'index'
 urlpatterns = [
     path('', views.index, name='index'),
+    
+    # url('', include('social_django.urls', namespace='social'))
+
 ]
