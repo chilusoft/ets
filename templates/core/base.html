@@ -57,9 +57,6 @@
             {% endif %}
         </div>
         <div class="row">
-            {% block side_bar %}
-            {% include "core/side_bar.html" %}
-            {% endblock %}
             
             {% block content %} 
                 
@@ -76,6 +73,7 @@
 
     <script src="{% static 'assets/js/pages/dashboard.js' %}"></script>
     <script src="{% static 'assets/js/mazer.js' %}"></script>
+    <script src="{% static 'assets/js/horizontal-layout.js' %}"></script>
 
 
 </body>
