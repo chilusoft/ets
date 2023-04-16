@@ -14,22 +14,16 @@
  limitations under the License.
 -->
 
-{% extends "core/base.html" %}
-
-{% block title %} Home {% endblock %}
-
-    
-
-            {% block content %} 
-                {% include 'index/partials/dashboard.html' %}
-             {% endblock %}
-
- 
-<!-- 
-    <p>
-        <a href="{% url 'social:begin' 'facebook' %}">Facebook</a>
-        <a href="{% url 'social:begin' 'google-oauth2' %}">Google</a>
-
-
-
-    </p> -->
+<footer>
+    <div class="container">
+        <div class="footer clearfix mb-0 text-muted">
+            <div class="float-start">
+                <p><script>var _date = new Date(); document.write(_date.getFullYear())</script> &copy; Chilusoft Labs</p>
+            </div>
+            <div class="float-end">
+                <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
+                        href="mailto:mukukachilu@gmail.com">Chilusoft Labs</a></p>
+            </div>
+        </div>
+    </div>
+</footer>

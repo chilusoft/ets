@@ -42,27 +42,27 @@
 
 </head>
 <body>
-
-    <div class="container" id="app">
-        <div class="row">
-            {% if messages %}
-
-            {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}" role="alert">
-                {{ message }}
-
-            </div>
-            {% endfor %}
-
-            {% endif %}
-        </div>
-        <div class="row">
-            
-            {% block content %} 
+    <div id="app">
+        <div id="main" class="layout-horizontal">
+           
+           
+                {% block header %} 
+                    {% include 'core/partials/header.html' %}
+                {% endblock header %}
+                <div class="content-wrappper container">
+                     {% block content %} 
+                        {% include 'index/partials/dashboard.html' %}
+                    {% endblock %}
+    
+                    {% block footer %}
+                        {% include 'core/partials/footer.html' %}
+                    {% endblock footer %}
                 
-            {% endblock %}
+               
+            </div>
         </div>
     </div>
+   
 
     <script src="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
     <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>

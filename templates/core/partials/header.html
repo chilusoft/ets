@@ -15,37 +15,50 @@
 -->
 
 <header class="mb-5">
-    <div class="header-top">
-        <div class="container">
-            <div class="logo">
+    <!-- <div class="header-top">
+        <div class="container"> -->
+            <!-- <div class="logo">
                 <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
-            </div>
-            <div class="header-top-right">
+            </div> -->
+            <!-- <div class="header-top-right"> -->
 
                 <!-- Burger button responsive -->
-                <a href="#" class="burger-btn d-block d-xl-none">
+                <!-- <a href="#" class="burger-btn d-block d-xl-none">
                     <i class="bi bi-justify fs-3"></i>
                 </a>
             </div>
         </div>
-    </div>
+    </div> -->
     <nav class="main-navbar">
         <div class="container">
             <ul>
                 
                 
                 
-                <li
+                <li 
                     class="menu-item  ">
-                    <a href="index.html" class='menu-link'>
+                    <a href="{% url 'index:index' %}" class='menu-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
-                
-                
-                
                 <li
+                class="menu-item  ">
+                <a href="{% url 'index:expenses' %}" class='menu-link'>
+                    <i class="bi bi-cart-check"></i>
+                    <span>Expenses</span>
+                </a>
+            </li>
+                
+            <li
+                class="menu-item  ">
+                <a href="{% url 'index:investments' %}" class='menu-link'>
+                    <i class="bi bi-arrow-left-right"></i>
+                    <span>Investments</span>
+                </a>
+            </li>
+                
+                <li hidden
                     class="menu-item  has-sub">
                     <a href="#" class='menu-link'>
                         <i class="bi bi-stack"></i>
