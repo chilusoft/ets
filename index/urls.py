@@ -13,13 +13,15 @@
 # limitations under the License.
 
 from django.urls import include, path
-
+from django.contrib.auth.views import LoginView
 
 from . import views
 
 app_name = 'index'
 urlpatterns = [
     path('', views.index, name='index'),
+    path('login/', LoginView.as_view(template_name='core/login.html',), name='login_view'),
+    path('register/', views.register, name='register')
     
     # url('', include('social_django.urls', namespace='social'))
 
