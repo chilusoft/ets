@@ -8,6 +8,12 @@ from django.contrib import messages
 def index(request):
     return render(request, 'index/index.html')
 
+def expenses(request):
+    return render(request, 'index/expenses.html')
+
+def investments(request):
+    return render(request, 'index/investments.html')
+
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)

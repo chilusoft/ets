@@ -21,7 +21,9 @@ app_name = 'index'
 urlpatterns = [
     path('', views.index, name='index'),
     path('login/', LoginView.as_view(template_name='core/login.html',), name='login_view'),
-    path('register/', views.register, name='register')
+    path('register/', views.register, name='register'),
+    path('expenses/', views.expenses, name='expenses'),
+    path('investments/', views.investments, name='investments'),
     
     # url('', include('social_django.urls', namespace='social'))
 
