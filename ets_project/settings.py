@@ -56,6 +56,7 @@ ROOT_URLCONF = 'ets_project.urls'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -68,6 +69,15 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
   'locale': 'en_US',
   'fields': 'id, name, email, age_range'
 }
+
+# Google Auth2 setup
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '920637447895-nijo9es7ll1mucnec931rajj67522603.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    'https://www.googleapis.com/auth/userinfo.email',
+    'https://www.googleapis.com/auth/userinfo.profile',
+]
+SOCIAL_AUTH_GOOGLE_OAUTH2_USE_DEPRECATED_API = True
 
 TEMPLATES = [
     {
@@ -144,6 +154,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'index.User'
+LOGIN_REDIRECT_URL = 'index:index'
 
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 SOCIAL_AUTH_URL_NAMESPACE = 'social'

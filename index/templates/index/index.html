@@ -19,10 +19,15 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}
-    Home page works!
+    
+
+
 
     <p>
         <a href="{% url 'social:begin' 'facebook' %}">Facebook</a>
+        <a href="{% url 'social:begin' 'google-oauth2' %}">Google</a>
+        <!-- sign in with google -->
+
 
     </p>
 {% endblock %}
