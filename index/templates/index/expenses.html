@@ -25,30 +25,31 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    Jquery Datatable
+                    Expenses Data
                 </div>
                 <div class="card-body">
                     <table class="table" id="table1">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>City</th>
-                                <th>Status</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Proof</th>
+                                <th>Date</th>
+                                <th>Amount</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {% for expense in expenses %}
                             <tr>
-                                <td>Graiden</td>
-                                <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                <td>076 4820 8838</td>
-                                <td>Offenburg</td>
+                                <td>{{expense.expense_type}}</td>
+                                <td>{{expense.description}}</td>
+                                <td><a href="{{expense.expense_proof.url}} ">{{expense.expense_proof.name}} </a></td>
+                                <td>{{expense.expense_date}}</td>
                                 <td>
-                                    <span class="badge bg-success">Active</span>
+                                    <span class="badge bg-success">{{expense.amount}}</span>
                                 </td>
                             </tr>
-                            
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -77,9 +78,9 @@
     let jquery_datatable = $("#table1").DataTable()
     
 let optionsVisitorsProfile  = {
-	series: [70, 30],
-	labels: ['Male', 'Female'],
-	colors: ['#435ebe','#55c6e8'],
+	series: [parseFloat('{{all_food_expenses}}'), parseFloat('{{all_travel_expenses}}'), parseFloat('{{all_entertainment_expenses}}'), parseFloat('{{all_internet_expenses}}'), parseFloat('{{all_other_expenses}}')],
+	labels: ['Food', 'Travel', 'Entertainment', 'Internet', 'Other'],
+	colors: ['#435ebe','#55c6e8', '#f1b44c', '#e3eaef', '#3bafda'],
 	chart: {
 		type: 'donut',
 		width: '100%',
