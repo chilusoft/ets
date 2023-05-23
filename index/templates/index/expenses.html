@@ -15,7 +15,165 @@
 -->
 
 {% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
 
+{% block custom_css %} {% endblock %}
 {% block content %}
-expenes page works!
+
+<div class="row">
+    <div class="col-lg-9">
+        <section class="section">
+            <div class="card">
+                <div class="card-header">
+                    Expenses Data
+                </div>
+                <div class="card-body">
+                    <table class="table" id="table1">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Proof</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for expense in expenses %}
+                            <tr>
+                                <td>{{expense.expense_type}}</td>
+                                <td>{{expense.description}}</td>
+                                <td><a href="{{expense.expense_proof.url}} ">{{expense.expense_proof.name}} </a></td>
+                                <td>{{expense.expense_date}}</td>
+                                <td>
+                                    <span class="badge bg-success">{{expense.amount}}</span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    
+        </section>
+    </div>
+    <div class="col-lg-3">
+    
+        <div class="card-body">
+            <div class="card-header"><h3 class="text-center">Overview</h3></div>
+            <div id="chart-visitors-profile"></div>
+        </div>
+
+        <div class="card-body">
+            <div class="card-header"><h3 class="text-center">Add Expense Record</h3></div>
+
+            <!-- <div>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ expense_creation_form|crispy }}
+                </form>
+            </div> -->
+
+            <div class="card-content">
+                <div class="card-body">
+                    <p>
+                       Expense Actions
+                    </p>
+                    <!-- Button trigger for scrolling content modal -->
+                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                        data-bs-target="#exampleModalScrollable">
+                        Add Expense
+                    </button>
+
+                    <!--scrolling content Modal -->
+                    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalScrollableTitle">Add Expense record </h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <i data-feather="x"></i>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        {{ expense_creation_form|crispy }}
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-light-secondary"
+                                        data-bs-dismiss="modal">
+                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                        <span class="d-none d-sm-block">Close</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+
 {% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'assets/vendors/jquery/jquery.min.js' %}"></script>
+
+<script src="{% static 'assets/vendors/jquery-datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'assets/vendors/jquery-datatables/custom.jquery.dataTables.bootstrap5.min.js' %}"></script>
+<script>
+    let jquery_datatable = $("#table1").DataTable()
+    $(function(){
+        // console.log('$', $);
+        // console.log($('select', '[name="user"]').val());
+    })
+let optionsVisitorsProfile  = {
+	series: [parseFloat('{{all_food_expenses}}'), parseFloat('{{all_travel_expenses}}'), parseFloat('{{all_entertainment_expenses}}'), parseFloat('{{all_internet_expenses}}'), parseFloat('{{all_other_expenses}}')],
+	labels: ['Food', 'Travel', 'Entertainment', 'Internet', 'Other'],
+	colors: ['#435ebe','#55c6e8', '#f1b44c', '#e3eaef', '#3bafda'],
+	chart: {
+		type: 'donut',
+		width: '100%',
+		height:'350px'
+	},
+	legend: {
+		position: 'bottom'
+	},
+	plotOptions: {
+		pie: {
+			donut: {
+				size: '30%'
+			}
+		}
+	}
+}
+
+var chartVisitorsProfile = new ApexCharts(document.getElementById('chart-visitors-profile'), optionsVisitorsProfile)
+chartVisitorsProfile.render()
+
+//     var options = {
+//   chart: {
+//     type: 'line'
+//   },
+//   series: [{
+//     name: 'sales',
+//     data: [30,40,35,50,49,60,70,91,125]
+//   }],
+//   xaxis: {
+//     categories: [1991,1992,1993,1994,1995,1996,1997, 1998,1999]
+//   }
+// }
+
+// var chart = new ApexCharts(document.querySelector("#chart-visitors-profile"), options);
+
+// chart.render();
+// </script>
+{% endblock %}

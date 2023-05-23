@@ -8,6 +8,10 @@ django = "*"
 djangorestframework = "*"
 pillow = "*"
 gunicorn = "*"
+django-crispy-forms = "*"
+crispy-bootstrap5 = "*"
+python-dotenv = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
