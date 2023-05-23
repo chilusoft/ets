@@ -36,10 +36,11 @@ class Expense(models.Model):
 class Investment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     amount = models.FloatField(default=0.0)
-    expected_return = models.FloatField(default=0.0)
-    actual_return = models.FloatField(default=0.0)
-    profit = models.FloatField(default=0.0)
+    expected_return = models.FloatField(default=0.0, null=True, blank=True)
+    actual_return = models.FloatField(default=0.0, null=True, blank=True)
+    profit = models.FloatField(default=0.0, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
+    tnx_time = models.DateTimeField(null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     data_updated = models.DateTimeField(auto_now=True)
 
