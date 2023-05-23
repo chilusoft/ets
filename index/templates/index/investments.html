@@ -68,6 +68,70 @@
                                 $('#id_user').attr('disabled', false)
                                 $('#inv-form').submit()
                             })
+
+                            // Apex Chart Options
+
+                            var barOptions = {
+                                 series: [
+                                     {
+                                         name: "Capital Inv.",
+                                         data: eval("[{% for value in capt_inv_pack %} '{{value}}',{% endfor %}]"),
+                                     },
+                                     {
+                                         name: "Exp Revenue",
+                                         data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
+                                     },
+                                     {
+                                         name: "Actl. Revenue",
+                                         data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
+                                     },  
+                                     {
+                                        type: "area",
+                                         name: "Profit",
+                                         data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
+                                     },
+                                 ],
+                                 chart: {
+                                     type: "bar",
+                                     height: 350,
+                                 },
+                                 plotOptions: {
+                                     bar: {
+                                         horizontal: false,
+                                         columnWidth: "55%",
+                                         endingShape: "rounded",
+                                     },
+                                 },
+                                 dataLabels: {
+                                     enabled: false,
+                                 },
+                                 stroke: {
+                                     show: true,
+                                     width: 2,
+                                     colors: ["transparent"],
+                                 },
+                                 xaxis: {
+                                     categories: eval("[{% for month in month_pack %} '{{month}}',{% endfor %}]"),
+                                 },
+                                 yaxis: {
+                                     title: {
+                                         text: "$ (thousands)",
+                                     },
+                                 },
+                                 fill: {
+                                     opacity: 1,
+                                 },
+                                 tooltip: {
+                                     y: {
+                                         formatter: function (val) {
+                                             return "$ " + val + " thousands";
+                                         },
+                                     },
+                                 },
+                             };
+                            var bar = new ApexCharts(document.querySelector("#bar"), barOptions);
+                            bar.render();
+
                          })
                         </script>
                     </div>

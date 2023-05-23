@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import redirect, render
 # import get_user_model
 from django.contrib.auth import get_user_model as User
@@ -67,11 +68,29 @@ def expenses(request):
 
 def investments(request):
     if request.method != 'POST':
+        month_pack = []
+        capt_inv_pack = []
+        for i in range(1, 13):
+
+            month_start = f'2020-{i}-01'
+            # AGGREGATE SUM OF INVESTMENTS per month
+            month_investments = request.user.investment_set.filter(date_created__month=i).aggregate(Sum('amount'))
+            # print(month_investments)
+            if month_investments['amount__sum'] is None:
+                month_investments['amount__sum'] = 0
+            capt_inv_pack.append(month_investments['amount__sum'])
+            month_start = datetime.strptime(month_start, '%Y-%m-%d')
+            month_pack.append(month_start.strftime('%B'))
+        print(capt_inv_pack)
+
         initial_data = {
             'user': request.user,
         }
         inv_form = InvestmentForm(initial=initial_data)
-        return render(request, 'index/investments.html', {'inv_form': inv_form})
+        return render(request, 'index/investments.html',
+                       {'inv_form': inv_form,
+                         'month_pack': month_pack, 
+                        'capt_inv_pack': capt_inv_pack})
     else:
         inv_form = InvestmentForm(request.POST)
         inv_form.fields['user'].initial = request.user
