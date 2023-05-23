@@ -67,21 +67,20 @@ def expenses(request):
 
 def investments(request):
     if request.method != 'POST':
-        inv_form = InvestmentForm()
-        inv_form.fields['user'].initial = request.user
-        inv_form.fields['user'].widget.attrs['disabled'] = True
-        inv_form.fields['amount'].widget.attrs['placeholder'] = 'Amount in Kwacha'
-        inv_form.fields['amount'].widget.attrs['step'] = 0.01
+        initial_data = {
+            'user': request.user,
+        }
+        inv_form = InvestmentForm(initial=initial_data)
         return render(request, 'index/investments.html', {'inv_form': inv_form})
     else:
         inv_form = InvestmentForm(request.POST)
         inv_form.fields['user'].initial = request.user
-        inv_form.fields['user'].widget.attrs['disabled'] = True
         if inv_form.is_valid():
             inv_form.save()
             return redirect('index:investments')
         else:
-            return redirect('index:investments')
+            # return redirect('index:investments')
+            return render(request, 'index/investments.html', {'inv_form': inv_form})
 
 
 def register(request):

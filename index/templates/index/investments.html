@@ -60,7 +60,14 @@
                         </button>
                         <script>
                          $(function(){
-                            console.log('jQuery loaded')
+                            // console.log('jQuery loaded')
+                            $('#id_user').attr('disabled', true)
+
+                            $('#inv-submit').click(function(){
+                                
+                                $('#id_user').attr('disabled', false)
+                                $('#inv-form').submit()
+                            })
                          })
                         </script>
                     </div>
