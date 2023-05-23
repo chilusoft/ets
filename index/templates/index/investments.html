@@ -79,17 +79,17 @@
                                      },
                                      {
                                          name: "Exp Revenue",
-                                         data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
+                                         data: eval("[{% for value in act_ret_pack %} '{{value}}',{% endfor %}]"),
                                      },
                                      {
                                          name: "Actl. Revenue",
-                                         data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
+                                         data: eval("[{% for value in exp_ret_pack %} '{{value}}',{% endfor %}]"),
                                      },  
-                                     {
-                                        type: "area",
-                                         name: "Profit",
-                                         data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
-                                     },
+                                    //  {
+                                        
+                                    //      name: "Profit",
+                                    //      data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
+                                    //  },
                                  ],
                                  chart: {
                                      type: "bar",

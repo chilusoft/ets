@@ -70,19 +70,27 @@ def investments(request):
     if request.method != 'POST':
         month_pack = []
         capt_inv_pack = []
+        expected_return_pack = []
+        actual_return_pack = []
         for i in range(1, 13):
 
             month_start = f'2020-{i}-01'
             # AGGREGATE SUM OF INVESTMENTS per month
-            month_investments = request.user.investment_set.filter(date_created__month=i).aggregate(Sum('amount'))
+            month_investments = request.user.investment_set.filter(date_created__month=i).aggregate(Sum('amount')).get('amount__sum') if not None else 0
+            month_expected_return = request.user.investment_set.filter(date_created__month=i).aggregate(Sum('expected_return')).get('expected_return__sum') if not None else 0
+            month_actual_return = request.user.investment_set.filter(date_created__month=i).aggregate(Sum('actual_return')).get('actual_return__sum') if not None else 0
+            print(month_investments)
             # print(month_investments)
-            if month_investments['amount__sum'] is None:
-                month_investments['amount__sum'] = 0
-            capt_inv_pack.append(month_investments['amount__sum'])
+           
+            capt_inv_pack.append(month_investments)
+            expected_return_pack.append(month_expected_return)
+            actual_return_pack.append(month_actual_return)
+
             month_start = datetime.strptime(month_start, '%Y-%m-%d')
             month_pack.append(month_start.strftime('%B'))
         print(capt_inv_pack)
-
+        print(expected_return_pack)
+        print(actual_return_pack)
         initial_data = {
             'user': request.user,
         }
@@ -90,7 +98,9 @@ def investments(request):
         return render(request, 'index/investments.html',
                        {'inv_form': inv_form,
                          'month_pack': month_pack, 
-                        'capt_inv_pack': capt_inv_pack})
+                        'capt_inv_pack': capt_inv_pack,
+                        'act_ret_pack': actual_return_pack,
+                        'exp_ret_pack': expected_return_pack,})
     else:
         inv_form = InvestmentForm(request.POST)
         inv_form.fields['user'].initial = request.user
