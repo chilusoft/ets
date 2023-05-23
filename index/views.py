@@ -70,6 +70,8 @@ def investments(request):
         inv_form = InvestmentForm()
         inv_form.fields['user'].initial = request.user
         inv_form.fields['user'].widget.attrs['disabled'] = True
+        inv_form.fields['amount'].widget.attrs['placeholder'] = 'Amount in Kwacha'
+        inv_form.fields['amount'].widget.attrs['step'] = 0.01
         return render(request, 'index/investments.html', {'inv_form': inv_form})
     else:
         inv_form = InvestmentForm(request.POST)

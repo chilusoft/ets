@@ -42,7 +42,7 @@
                     </div>
                     <div class="modal-body">
                        <div>
-                        <form action="" class="" method="POST">
+                        <form id="inv-form" action="" class="" method="POST">
                             {% csrf_token %}
                             {{ inv_form|crispy }}
                         </form>
@@ -54,10 +54,15 @@
                             <i class="bx bx-x d-block d-sm-none"></i>
                             <span class="d-none d-sm-block">Close</span>
                         </button>
-                        <button type="button" class="btn btn-primary ml-1" data-bs-dismiss="modal">
+                        <button id="inv-submit" type="button" class="btn btn-primary ml-1">
                             <i class="bx bx-check d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Accept</span>
+                            <span class="d-none d-sm-block">Add</span>
                         </button>
+                        <script>
+                         $(function(){
+                            console.log('jQuery loaded')
+                         })
+                        </script>
                     </div>
                 </div>
             </div>
@@ -219,7 +224,6 @@
 
 {% block scripts %}
 
-        
 <script src="{% static 'assets/vendors/dayjs/dayjs.min.js' %}"></script>
 <script src="{% static 'assets/vendors/apexcharts/apexcharts.js' %}"></script>
 <script src="{% static 'assets/js/pages/ui-apexchart.js' %}"></script>
