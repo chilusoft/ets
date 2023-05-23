@@ -16,7 +16,7 @@
 
 {% extends 'core/base.html' %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 {% block title %} | Investments {% endblock title %}
 
 {% block content %}
@@ -41,11 +41,12 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>
-                            Candy oat cake topping topping chocolate cake. Icing pudding jelly beans
-                            I love chocolate carrot
-                            cake wafer candy canes. Biscuit croissant fruitcake bonbon soufflé.
-                        </p>
+                       <div>
+                        <form action="" class="" method="POST">
+                            {% csrf_token %}
+                            {{ inv_form|crispy }}
+                        </form>
+                       </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light-secondary"

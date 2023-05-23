@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.db.models import Sum
 
-from .forms import ExpenseCreationForm
+from .forms import ExpenseCreationForm, InvestmentForm
 # Create your views here.
 
 def index(request):
@@ -66,7 +66,21 @@ def expenses(request):
         return redirect('login')
 
 def investments(request):
-    return render(request, 'index/investments.html')
+    if request.method != 'POST':
+        inv_form = InvestmentForm()
+        inv_form.fields['user'].initial = request.user
+        inv_form.fields['user'].widget.attrs['disabled'] = True
+        return render(request, 'index/investments.html', {'inv_form': inv_form})
+    else:
+        inv_form = InvestmentForm(request.POST)
+        inv_form.fields['user'].initial = request.user
+        inv_form.fields['user'].widget.attrs['disabled'] = True
+        if inv_form.is_valid():
+            inv_form.save()
+            return redirect('index:investments')
+        else:
+            return redirect('index:investments')
+
 
 def register(request):
     if request.method == 'POST':
