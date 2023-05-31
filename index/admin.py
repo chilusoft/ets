@@ -34,7 +34,7 @@ class QuotationAdmin(admin.ModelAdmin):
 
 class QuotationItemAdmin(admin.ModelAdmin):
     list_display = ('id', 'product', 'quantity')
-    search_fields = ('id','quotation__id', 'product', 'quantity')
+    search_fields = ('id', 'product', 'quantity')
 
 admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Product, ProductAdmin)
