@@ -2,9 +2,12 @@ from datetime import datetime
 from django.shortcuts import redirect, render
 # import get_user_model
 from django.contrib.auth import get_user_model as User
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.db.models import Sum
+
+from index.models import Quotation
 
 from .forms import ExpenseCreationForm, InvestmentForm
 # Create your views here.
@@ -12,6 +15,7 @@ from .forms import ExpenseCreationForm, InvestmentForm
 def index(request):
     return render(request, 'index/index.html')
 
+@login_required
 def expenses(request):
 
     expense_creation_form = ExpenseCreationForm()
@@ -66,6 +70,8 @@ def expenses(request):
     else:
         return redirect('login')
 
+
+@login_required
 def investments(request):
     if request.method != 'POST':
         month_pack = []
@@ -110,6 +116,12 @@ def investments(request):
         else:
             # return redirect('index:investments')
             return render(request, 'index/investments.html', {'inv_form': inv_form})
+
+@login_required
+def business(request):
+    quotations = Quotation.objects.all()
+    ctx = {'quotations': quotations}
+    return render(request, 'index/business.html', ctx)
 
 
 def register(request):
