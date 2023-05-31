@@ -109,7 +109,7 @@ class Quotation(models.Model):
             str: String representation of the quotation.
         """
 
-        return f"Quotation #{self.pk}"
+        return f"Quotation #{self.pk} - {self.customer.name} - {self.total_price} ZMW"
 
 
 class QuotationItem(models.Model):
