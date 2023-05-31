@@ -7,6 +7,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.db.models import Sum
 
+from index.models import Quotation
+
 from .forms import ExpenseCreationForm, InvestmentForm
 # Create your views here.
 
@@ -114,6 +116,12 @@ def investments(request):
         else:
             # return redirect('index:investments')
             return render(request, 'index/investments.html', {'inv_form': inv_form})
+
+@login_required
+def business(request):
+    quotations = Quotation.objects.all()
+    ctx = {'quotations': quotations}
+    return render(request, 'index/business.html', ctx)
 
 
 def register(request):
