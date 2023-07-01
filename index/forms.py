@@ -1,8 +1,15 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from index.models import Expense, Investment, User
 
-from index.models import Expense, Investment
 
 
+class UserRegisterForm(UserCreationForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username','phone_number','email','password1','password2']
 
 class ExpenseCreationForm(forms.ModelForm):
 

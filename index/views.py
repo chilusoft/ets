@@ -9,7 +9,7 @@ from django.db.models import Sum
 
 from index.models import Quotation
 
-from .forms import ExpenseCreationForm, InvestmentForm
+from .forms import ExpenseCreationForm, InvestmentForm, UserRegisterForm
 # Create your views here.
 
 def index(request):
@@ -126,13 +126,13 @@ def business(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST,)
+        form = UserRegisterForm(request.POST,)
         if form.is_valid():
             form.save()
             # username = form.cleaned_data.get('username')
             # messages.success(request, f'Account created for {username}!')
-            return redirect('index')
+            return render(request, 'index/index.html')
     else:
-        form = UserCreationForm()
+        form = UserRegisterForm()
 
         return render(request, 'core/register.html', {'form': form})
