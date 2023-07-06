@@ -12,6 +12,7 @@ django-crispy-forms = "*"
 crispy-bootstrap5 = "*"
 python-dotenv = "*"
 psycopg2-binary = "*"
+social-auth-app-django = "*"
 
 [dev-packages]
 
