@@ -25,6 +25,7 @@ urlpatterns = [
     path('expenses/', views.expenses, name='expenses'),
     path('business/', views.business, name='business'),
     path('investments/', views.investments, name='investments'),
+    path('create_quote/', views.create_quote, name='create_quote'),
     
     # url('', include('social_django.urls', namespace='social'))
 

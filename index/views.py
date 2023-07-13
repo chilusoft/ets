@@ -6,10 +6,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.db.models import Sum
+from django.views import View
 
 from index.models import Quotation
 
-from .forms import ExpenseCreationForm, InvestmentForm
+from .forms import ExpenseCreationForm, InvestmentForm, ProductForm, QuotationForm, QuotationItemForm, UserRegisterForm
 # Create your views here.
 
 def index(request):
@@ -120,19 +121,33 @@ def investments(request):
 @login_required
 def business(request):
     quotations = Quotation.objects.all()
-    ctx = {'quotations': quotations}
+    quote_form = QuotationForm()
+    quote_item_form = QuotationItemForm()
+    product_form = ProductForm()
+    ctx = {'quotations': quotations, 'quote_form': quote_form, 'quote_item_form': quote_item_form, 'product_form': product_form}
     return render(request, 'index/business.html', ctx)
 
 
+def create_quote(request):
+    if request.method == 'POST':
+        form = QuotationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index:business')
+    else:
+        form = QuotationForm()
+
+    return render(request, 'index/business.html', {'quote_form': form})
+
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST,)
+        form = UserRegisterForm(request.POST,)
         if form.is_valid():
             form.save()
             # username = form.cleaned_data.get('username')
             # messages.success(request, f'Account created for {username}!')
-            return redirect('index')
+            return render(request, 'index/index.html')
     else:
-        form = UserCreationForm()
+        form = UserRegisterForm()
 
         return render(request, 'core/register.html', {'form': form})

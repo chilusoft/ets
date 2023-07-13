@@ -15,7 +15,7 @@
 -->
 
 {% extends 'core/base.html' %}
-
+{% load crispy_forms_tags %}
 
 {% block content %}
 
@@ -32,8 +32,8 @@
                             aria-controls="home" aria-selected="true">Quotations</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
-                            aria-controls="profile" aria-selected="false">Profile</a>
+                        <a class="nav-link" id="products-tab" data-bs-toggle="tab" href="#products" role="tab"
+                            aria-controls="products" aria-selected="false">Products</a>
                     </li>
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab"
@@ -44,7 +44,10 @@
                     <div class="tab-pane fade show active" id="quotations" role="tabpanel" aria-labelledby="home-tab">
                       
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
+                                <span class="">
+                                    <a href="#" id="create-quote" class="btn btn-info btn-sm">Add</a>
+                                </span><br>
                                 <h3>Recent Quotations</h3>
 
                                 <div>
@@ -73,23 +76,32 @@
                                 </div>
 
                             </div>
+                            <div class="col-lg-4">
+                                <div>
+                                  {% include 'index/partials/create_quote_item.html' %}                                    
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div>
+                                    {% include 'index/partials/create_quote.html' %}
+
+                                    
+                                </div>
+                            </div>
                         </div>
 
                     </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        Integer interdum diam eleifend metus lacinia, quis gravida eros mollis. Fusce non sapien
-                        sit amet magna dapibus
-                        ultrices. Morbi tincidunt magna ex, eget faucibus sapien bibendum non. Duis a mauris ex.
-                        Ut finibus risus sed massa
-                        mattis porta. Aliquam sagittis massa et purus efficitur ultricies. Integer pretium dolor
-                        at sapien laoreet ultricies.
-                        Fusce congue et lorem id convallis. Nulla volutpat tellus nec molestie finibus. In nec
-                        odio tincidunt eros finibus
-                        ullamcorper. Ut sodales, dui nec posuere finibus, nisl sem aliquam metus, eu accumsan
-                        lacus felis at odio. Sed lacus
-                        quam, convallis quis condimentum ut, accumsan congue massa. Pellentesque et quam vel
-                        massa pretium ullamcorper vitae eu
-                        tortor.
+                    <div class="tab-pane fade" id="products" role="tabpanel" aria-labelledby="products-tab">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <h3>Create Product</h3>
+                                <div>
+                                    {% include 'index/partials/create_product.html' %}
+                                </div>
+                            </div>
+                            <div class="col-lg-9"></div>
+
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                         <p class="mt-2">Duis ultrices purus non eros fermentum hendrerit. Aenean ornare interdum
