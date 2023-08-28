@@ -21,20 +21,31 @@ class Expense(models.Model):
         ("Internet", "Internet"),
         ("Other", "Other"),
     )
+    EXPENSE_STATUS = (
+        ('resolved', 'resolved'),
+        ('confirmed', 'confirmed'),
+        ('pending', 'pending'),
+        ('rejected', 'rejected')
+    )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     amount = models.FloatField(default=0.0)
     description = models.TextField(null=True, blank=True)
     expense_type = models.CharField(max_length=100, choices=EXPENSE_TYPE_CHOICES)
     expense_date = models.DateField(null=True, blank=True)
-    date_created = models.DateTimeField(auto_now_add=True)
-    data_updated = models.DateTimeField(auto_now=True)
     expense_proof = models.ImageField(
         upload_to="expense_proof",
         default="expense_proof/default.pdf",
         null=True,
         blank=True,
     )
-
+    expense_status = models.CharField(
+        max_length=100, 
+        choices=EXPENSE_STATUS,
+        default='pending'
+    )
+    date_created = models.DateTimeField(auto_now_add=True)
+    data_updated = models.DateTimeField(auto_now=True)
+   
     def __str__(self):
         return f"{self.description} - {self.amount} - {self.expense_type}"
 
