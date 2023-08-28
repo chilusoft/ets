@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.db.models import Sum
 from django.views import View
 
-from index.models import Quotation
+from index.models import Expense, Quotation
 
 from .forms import ExpenseCreationForm, InvestmentForm, ProductForm, QuotationForm, QuotationItemForm, UserRegisterForm
 # Create your views here.
@@ -25,7 +25,7 @@ def expenses(request):
     expense_creation_form.fields['user'].widget.attrs['disabled'] = True
     if request.user.is_authenticated:
         user = request.user
-        expenses = user.expense_set.all()
+        expenses = Expense.objects.filter(user=user)
         if request.method == 'POST':
             form = ExpenseCreationForm(request.POST)
             form.fields['user'].initial = request.user
