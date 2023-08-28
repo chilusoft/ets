@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.db.models import Sum
 from django.views import View
+from django.http import HttpResponse
 
 from index.models import Expense, Quotation
 
@@ -27,14 +28,18 @@ def expenses(request):
         user = request.user
         expenses = Expense.objects.filter(user=user)
         if request.method == 'POST':
-            form = ExpenseCreationForm(request.POST)
-            form.fields['user'].initial = request.user
+            try:
+                expense_creation_form = ExpenseCreationForm(data=request.POST)
+                expense_creation_form.fields['user'].initial = request.user
 
-            if form.is_valid():
-                form.save()
-                return redirect('index:expenses')
-       
+                if expense_creation_form.is_valid():
+                    expense_creation_form.save()
+                    return redirect('index:expenses')
+            except Exception as e:
+                return HttpResponse(e)
         # Get total for expense type, Food
+        else:
+            ...
         exp_lst = []
         def check_if_none(value):
             if value is None:
